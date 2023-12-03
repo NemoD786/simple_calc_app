@@ -62,67 +62,66 @@ while menu_options != 3 :
         if menu_options == 1 :
             while True:
                 try:
-                    output_file = open("equations.txt", "a+")
-                    print("Perform a calculation:")
+                    with open("equations.txt", "a+") as output_file :
+                        print("Perform a calculation:")
 
-                    while True:
-                        try:
-                            num1 = int(input("Please enter the first number for your equation: "))
-                    
-                            break
-                        except Exception:
-                            print("Please enter a valid first number for your equation!")
-
-
-                    while True:        
-                        try:    
-                            num2 = int(input("Please enter the second number for your equation: "))
-                    
-                            break
-                        except Exception:
-                            print("Please enter a valid second number for your equation!")
+                        while True:
+                            try:
+                                num1 = int(input("Please enter the first number for your equation: "))
+                        
+                                break
+                            except Exception:
+                                print("Please enter a valid first number for your equation!")
 
 
-                    while True:
-                        try:
-                            operand = input("Please enter a valid operator (+,-,*,/) for your equation: ")
-                            
-                            if operand == "+" :
-                                equation = calculate(num1, operand, num2)
+                        while True:        
+                            try:    
+                                num2 = int(input("Please enter the second number for your equation: "))
+                        
+                                break
+                            except Exception:
+                                print("Please enter a valid second number for your equation!")
 
-                            elif operand == "-" :
-                                equation = calculate(num1, operand, num2)
 
-                            elif operand == "*" :
-                                equation = calculate(num1, operand, num2)
+                        while True:
+                            try:
+                                operand = input("Please enter a valid operator (+,-,*,/) for your equation: ")
+                                
+                                if operand == "+" :
+                                    equation = calculate(num1, operand, num2)
 
-                            elif operand == "/" :
-                                try:
-                                    if num2 ==0 :
-                                        raise ZeroDivisionError(f"{num1} cannot be divided by {num2}. Please try again.")
+                                elif operand == "-" :
+                                    equation = calculate(num1, operand, num2)
 
-                                    else :
-                                        equation = calculate(num1, operand, num2)
+                                elif operand == "*" :
+                                    equation = calculate(num1, operand, num2)
 
-                                    break
-                                except ZeroDivisionError:
-                                    print(f"{num1} cannot be divided by {num2}. Please try again.")
+                                elif operand == "/" :
+                                    try:
+                                        if num2 ==0 :
+                                            raise ZeroDivisionError(f"{num1} cannot be divided by {num2}. Please try again.")
 
-                            else :
-                                raise Exception("Please select either a \"+\", \"-\", \"*\" or \"/\".")
+                                        else :
+                                            equation = calculate(num1, operand, num2)
 
-                            break
-                        except Exception:
-                            print("Please select either a \"+\", \"-\", \"*\" or \"/\".")
+                                        break
+                                    except ZeroDivisionError:
+                                        print(f"{num1} cannot be divided by {num2}. Please try again.")
 
-                    if num2 ==0 and operand == "/" :
-                        print("Your equation could not be calculated.")
+                                else :
+                                    raise Exception("Please select either a \"+\", \"-\", \"*\" or \"/\".")
 
-                    else :    
-                        print(f"The answer to your equation is {equation}.")
+                                break
+                            except Exception:
+                                print("Please select either a \"+\", \"-\", \"*\" or \"/\".")
 
-                        output_file.write(f"{num1} {operand} {num2} = {equation}\n")
-                        output_file.close()
+                        if num2 ==0 and operand == "/" :
+                            print("Your equation could not be calculated.")
+
+                        else :    
+                            print(f"The answer to your equation is {equation}.")
+
+                            output_file.write(f"{num1} {operand} {num2} = {equation}\n")
 
                     break
                 except Exception:
@@ -133,10 +132,9 @@ while menu_options != 3 :
             while True:
                 try:
                     print("Print all previous equations:")
-                    output_file = open("equations.txt", "r")
-                    equation_history = output_file.read()
-                    print(equation_history)
-                    output_file.close()
+                    with open("equations.txt", "r") as output_file :
+                        equation_history = output_file.read()
+                        print(equation_history)
 
                     break
                 except FileNotFoundError:
