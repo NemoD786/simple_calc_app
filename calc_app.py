@@ -148,7 +148,7 @@ while menu_options != 3 :
 
 
         else :
-            raise Exception("Please select a valid menu option!")
+            raise ValueError
    
-    except Exception:
+    except ValueError:
         print("Please select a valid menu option!")
